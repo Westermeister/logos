@@ -3,12 +3,12 @@
  * Copyright (C) 2021 Westermeister. All rights reserved.
  */
 
-#ifndef GATES_HPP
-#define GATES_HPP
+#ifndef LOGIC_HPP
+#define LOGIC_HPP
 
 #include <string>
 
-namespace gates {
+namespace logic {
 
 /**
  * Compute logical AND.
@@ -106,6 +106,6 @@ std::string XNOR(std::string a, std::string b) {
   return "1";
 }
 
-} // namespace gates
+} // namespace logic
 
 #endif
