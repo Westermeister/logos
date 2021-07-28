@@ -12,8 +12,8 @@ namespace logic {
 
 /**
  * Compute logical AND.
- * @param a - String with one character: either "0" or "1".
- * @param b - Same as a.
+ * @param a - First bit. Should be either "0" or "1".
+ * @param b - Second bit. Should be either "0" or "1".
  * @returns a && b
  */
 std::string AND(std::string a, std::string b) {
@@ -25,8 +25,8 @@ std::string AND(std::string a, std::string b) {
 
 /**
  * Compute logical OR.
- * @param a - String with one character: either "0" or "1".
- * @param b - Same as a.
+ * @param a - First bit. Should be either "0" or "1".
+ * @param b - Second bit. Should be either "0" or "1".
  * @returns a || b
  */
 std::string OR(std::string a, std::string b) {
@@ -38,8 +38,8 @@ std::string OR(std::string a, std::string b) {
 
 /**
  * Compute logical XOR.
- * @param a - String with one character: either "0" or "1".
- * @param b - Same as a.
+ * @param a - First bit. Should be either "0" or "1".
+ * @param b - Second bit. Should be either "0" or "1".
  * @returns a ^ b
  */
 std::string XOR(std::string a, std::string b) {
@@ -54,7 +54,7 @@ std::string XOR(std::string a, std::string b) {
 
 /**
  * Compute logical NOT.
- * @param a - String with one character: either "0" or "1".
+ * @param a - Should be either "0" or "1".
  * @returns !a
  */
 std::string NOT(std::string a) {
@@ -66,8 +66,8 @@ std::string NOT(std::string a) {
 
 /**
  * Compute logical NAND.
- * @param a - String with one character: either "0" or "1".
- * @param b - Same as a.
+ * @param a - First bit. Should be either "0" or "1".
+ * @param b - Second bit. Should be either "0" or "1".
  * @returns !(a && b)
  */
 std::string NAND(std::string a, std::string b) {
@@ -79,8 +79,8 @@ std::string NAND(std::string a, std::string b) {
 
 /**
  * Compute logical NOR.
- * @param a - String with one character: either "0" or "1".
- * @param b - Same as a.
+ * @param a - First bit. Should be either "0" or "1".
+ * @param b - Second bit. Should be either "0" or "1".
  * @returns !(a || b)
  */
 std::string NOR(std::string a, std::string b) {
@@ -92,8 +92,8 @@ std::string NOR(std::string a, std::string b) {
 
 /**
  * Compute logical XNOR.
- * @param a - String with one character: either "0" or "1".
- * @param b - Same as a.
+ * @param a - First bit. Should be either "0" or "1".
+ * @param b - Second bit. Should be either "0" or "1".
  * @returns !(a ^ b)
  */
 std::string XNOR(std::string a, std::string b) {
