@@ -1,18 +1,21 @@
-COMPILER=g++
-FORMATTER=clang-format
-
-COMPILER_FLAGS=-std=c++17 -Wall -Wextra
-FORMATTER_FLAGS=-i --verbose
-
 .PHONY: all
 all: format
-	mkdir -p ./build
-	$(COMPILER) $(COMPILER_FLAGS) ./src/main.cpp -o ./build/chip.out
+	mkdir -p build
+	g++ -std=c++17 -Wall -Wextra src/main.cpp -o build/chip.out
+
+.PHONY: check
+check: format tests/catch.o
+	g++ -std=c++11 -Wall -Itests -o tests/testrunner.o tests/catch.o tests/logic.cpp
+	./tests/testrunner.o
+	rm -f tests/testrunner.o
 
 .PHONY: clean
 clean:
-	rm -rf ./build
+	rm -rf build
 
 .PHONY: format
 format:
-	$(FORMATTER) $(FORMATTER_FLAGS) ./src/main.cpp ./src/*.hpp
+	npx clang-format -i --verbose src/main.cpp src/*.hpp tests/*.cpp
+
+tests/catch.o:
+	g++ -std=c++11 -Wall -Itests -c tests/catch.cpp -o tests/catch.o
