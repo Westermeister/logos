@@ -1,5 +1,5 @@
 /**
- * Logic gates implemented with strings.
+ * Logic gate declarations.
  * Copyright (C) 2021 Westermeister. All rights reserved.
  */
 
@@ -16,12 +16,7 @@ namespace logic {
  * @param b - Second bit. Should be either "0" or "1".
  * @returns a && b
  */
-std::string AND(std::string a, std::string b) {
-  if (a == "1" && b == "1") {
-    return "1";
-  }
-  return "0";
-}
+std::string AND(std::string a, std::string b);
 
 /**
  * Compute logical OR.
@@ -29,12 +24,7 @@ std::string AND(std::string a, std::string b) {
  * @param b - Second bit. Should be either "0" or "1".
  * @returns a || b
  */
-std::string OR(std::string a, std::string b) {
-  if (a == "1" || b == "1") {
-    return "1";
-  }
-  return "0";
-}
+std::string OR(std::string a, std::string b);
 
 /**
  * Compute logical XOR.
@@ -42,27 +32,14 @@ std::string OR(std::string a, std::string b) {
  * @param b - Second bit. Should be either "0" or "1".
  * @returns a ^ b
  */
-std::string XOR(std::string a, std::string b) {
-  if (a == "1" && b == "0") {
-    return "1";
-  }
-  if (a == "0" && b == "1") {
-    return "1";
-  }
-  return "0";
-}
+std::string XOR(std::string a, std::string b);
 
 /**
  * Compute logical NOT.
  * @param a - Should be either "0" or "1".
  * @returns !a
  */
-std::string NOT(std::string a) {
-  if (a == "0") {
-    return "1";
-  }
-  return "0";
-}
+std::string NOT(std::string a);
 
 /**
  * Compute logical NAND.
@@ -70,12 +47,7 @@ std::string NOT(std::string a) {
  * @param b - Second bit. Should be either "0" or "1".
  * @returns !(a && b)
  */
-std::string NAND(std::string a, std::string b) {
-  if (a == "1" && b == "1") {
-    return "0";
-  }
-  return "1";
-}
+std::string NAND(std::string a, std::string b);
 
 /**
  * Compute logical NOR.
@@ -83,12 +55,7 @@ std::string NAND(std::string a, std::string b) {
  * @param b - Second bit. Should be either "0" or "1".
  * @returns !(a || b)
  */
-std::string NOR(std::string a, std::string b) {
-  if (a == "1" || b == "1") {
-    return "0";
-  }
-  return "1";
-}
+std::string NOR(std::string a, std::string b);
 
 /**
  * Compute logical XNOR.
@@ -96,15 +63,7 @@ std::string NOR(std::string a, std::string b) {
  * @param b - Second bit. Should be either "0" or "1".
  * @returns !(a ^ b)
  */
-std::string XNOR(std::string a, std::string b) {
-  if (a == "1" && b == "0") {
-    return "0";
-  }
-  if (a == "0" && b == "1") {
-    return "0";
-  }
-  return "1";
-}
+std::string XNOR(std::string a, std::string b);
 
 } // namespace logic
 
