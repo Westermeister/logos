@@ -23,7 +23,7 @@ std::string mux41(std::string i, std::string s) {
 
 std::string mux81(std::string i, std::string s) {
   std::string mux_1 = mux41(i.substr(0, 4), s.substr(1, 2));
-  std::string mux_2 = mux21(i.substr(4, 4), s.substr(1, 2));
+  std::string mux_2 = mux41(i.substr(4, 4), s.substr(1, 2));
   return mux21(mux_1 + mux_2, s.substr(0, 1));
 }
 
