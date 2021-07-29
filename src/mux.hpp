@@ -8,8 +8,6 @@
 
 #include <string>
 
-#include "logic.hpp"
-
 namespace mux {
 
 /**
