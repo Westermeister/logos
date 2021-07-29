@@ -9,56 +9,50 @@
 
 namespace logic {
 
-std::string AND(std::string a, std::string b) {
-  if (a == "1" && b == "1") {
+std::string AND(std::string input) {
+  if (input == "11") {
     return "1";
   }
   return "0";
 }
 
-std::string OR(std::string a, std::string b) {
-  if (a == "1" || b == "1") {
+std::string OR(std::string input) {
+  if (input == "01" || input == "10" || input == "11") {
     return "1";
   }
   return "0";
 }
 
-std::string XOR(std::string a, std::string b) {
-  if (a == "1" && b == "0") {
-    return "1";
-  }
-  if (a == "0" && b == "1") {
+std::string XOR(std::string input) {
+  if (input == "01" || input == "10") {
     return "1";
   }
   return "0";
 }
 
-std::string NOT(std::string a) {
-  if (a == "0") {
+std::string NOT(std::string input) {
+  if (input == "0") {
     return "1";
   }
   return "0";
 }
 
-std::string NAND(std::string a, std::string b) {
-  if (a == "1" && b == "1") {
+std::string NAND(std::string input) {
+  if (input == "11") {
     return "0";
   }
   return "1";
 }
 
-std::string NOR(std::string a, std::string b) {
-  if (a == "1" || b == "1") {
+std::string NOR(std::string input) {
+  if (input == "01" || input == "10" || input == "11") {
     return "0";
   }
   return "1";
 }
 
-std::string XNOR(std::string a, std::string b) {
-  if (a == "1" && b == "0") {
-    return "0";
-  }
-  if (a == "0" && b == "1") {
+std::string XNOR(std::string input) {
+  if (input == "01" || input == "10") {
     return "0";
   }
   return "1";

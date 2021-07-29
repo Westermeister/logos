@@ -12,58 +12,52 @@ namespace logic {
 
 /**
  * Compute logical AND.
- * @param a - First bit. Should be either "0" or "1".
- * @param b - Second bit. Should be either "0" or "1".
- * @returns a && b
+ * @param input - 2-bit bus. Can only contain the chars "0" and "1".
+ * @returns A string of length 1, either "0" or "1".
  */
-std::string AND(std::string a, std::string b);
+std::string AND(std::string input);
 
 /**
  * Compute logical OR.
- * @param a - First bit. Should be either "0" or "1".
- * @param b - Second bit. Should be either "0" or "1".
- * @returns a || b
+ * @param input - 2-bit bus. Can only contain the chars "0" and "1".
+ * @returns A string of length 1, either "0" or "1".
  */
-std::string OR(std::string a, std::string b);
+std::string OR(std::string input);
 
 /**
  * Compute logical XOR.
- * @param a - First bit. Should be either "0" or "1".
- * @param b - Second bit. Should be either "0" or "1".
- * @returns a ^ b
+ * @param input - 2-bit bus. Can only contain the chars "0" and "1".
+ * @returns A string of length 1, either "0" or "1".
  */
-std::string XOR(std::string a, std::string b);
+std::string XOR(std::string input);
 
 /**
  * Compute logical NOT.
- * @param a - Should be either "0" or "1".
- * @returns !a
+ * @param input - A single bit. Should be either "0" or "1".
+ * @returns A string of length 1, either "0" or "1".
  */
-std::string NOT(std::string a);
+std::string NOT(std::string input);
 
 /**
  * Compute logical NAND.
- * @param a - First bit. Should be either "0" or "1".
- * @param b - Second bit. Should be either "0" or "1".
- * @returns !(a && b)
+ * @param input - 2-bit bus. Can only contain the chars "0" and "1".
+ * @returns A string of length 1, either "0" or "1".
  */
-std::string NAND(std::string a, std::string b);
+std::string NAND(std::string input);
 
 /**
  * Compute logical NOR.
- * @param a - First bit. Should be either "0" or "1".
- * @param b - Second bit. Should be either "0" or "1".
- * @returns !(a || b)
+ * @param input - 2-bit bus. Can only contain the chars "0" and "1".
+ * @returns A string of length 1, either "0" or "1".
  */
-std::string NOR(std::string a, std::string b);
+std::string NOR(std::string input);
 
 /**
  * Compute logical XNOR.
- * @param a - First bit. Should be either "0" or "1".
- * @param b - Second bit. Should be either "0" or "1".
- * @returns !(a ^ b)
+ * @param input - 2-bit bus. Can only contain the chars "0" and "1".
+ * @returns A string of length 1, either "0" or "1".
  */
-std::string XNOR(std::string a, std::string b);
+std::string XNOR(std::string input);
 
 } // namespace logic
 

@@ -10,9 +10,9 @@
 namespace mux {
 
 std::string mux21(std::string i, std::string s) {
-  std::string and_1 = logic::AND(i.substr(0, 1), logic::NOT(s));
-  std::string and_2 = logic::AND(i.substr(1, 1), s);
-  return logic::OR(and_1, and_2);
+  std::string and_1 = logic::AND(i.substr(0, 1) + logic::NOT(s));
+  std::string and_2 = logic::AND(i.substr(1, 1) + s);
+  return logic::OR(and_1 + and_2);
 }
 
 std::string mux41(std::string i, std::string s) {
