@@ -1,3 +1,8 @@
+/**
+ * Tests for multiplexers.
+ * Copyright (C) 2021 Westermeister.
+ */
+
 #include "catch.hpp"
 
 #include "../src/mux.hpp"

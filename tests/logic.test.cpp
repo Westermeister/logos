@@ -1,3 +1,8 @@
+/**
+ * Tests for logic gates.
+ * Copyright (C) 2021 Westermeister.
+ */
+
 #include "catch.hpp"
 
 #include "../src/logic.hpp"
