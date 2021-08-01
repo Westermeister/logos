@@ -1,6 +1,6 @@
 /**
  * Multiplexer implementations.
- * Copyright (C) 2021 Westermeister. All rights reserved.
+ * Copyright (c) 2021 Westermeister. All rights reserved.
  */
 
 #include <string>
@@ -19,6 +19,11 @@ std::string mux41(std::string i, std::string s) {
   std::string mux_1 = mux21(i.substr(0, 2), s.substr(1, 1));
   std::string mux_2 = mux21(i.substr(2, 2), s.substr(1, 1));
   return mux21(mux_1 + mux_2, s.substr(0, 1));
+}
+
+std::string mux51(std::string i, std::string s) {
+  std::string initial_result = mux41(i.substr(0, 4), s.substr(1, 2));
+  return mux21(initial_result + i.substr(4, 1), s.substr(0, 1));
 }
 
 std::string mux81(std::string i, std::string s) {

@@ -1,6 +1,6 @@
 /**
  * Multiplexer declarations.
- * Copyright (C) 2021 Westermeister. All rights reserved.
+ * Copyright (c) 2021 Westermeister. All rights reserved.
  */
 
 #ifndef MUX_HPP
@@ -25,6 +25,14 @@ std::string mux21(std::string i, std::string s);
  * @returns The selected bit.
  */
 std::string mux41(std::string i, std::string s);
+
+/**
+ * 5:1 multiplexer.
+ * @param i - 5-bit bus input.
+ * @param sel - 3-bit selector. Represents an integer index. Must be <= 4.
+ * @returns The selected bit.
+ */
+std::string mux51(std::string i, std::string s);
 
 /**
  * 8:1 multiplexer.
