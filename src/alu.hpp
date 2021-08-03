@@ -39,8 +39,7 @@ private:
    * @returns 2-bit bus; first the operation output according to the opcode,
    * then the carry-out bit.
    */
-  std::string basic_alu(std::string input, std::string cin,
-                        std::string a_invert, std::string b_invert,
+  std::string basic_alu(std::string input, std::string cin, std::string a_invert, std::string b_invert,
                         std::string less_than, std::string opcode);
 
   /**
@@ -56,9 +55,15 @@ private:
    * @returns 4-bit bus; first the operation output according to the opcode,
    * then the carry-out bit, then the overflow bit, then the less-than bit.
    */
-  std::string msb_alu(std::string input, std::string cin, std::string a_invert,
-                      std::string b_invert, std::string less_than,
-                      std::string opcode);
+  std::string msb_alu(std::string input, std::string cin, std::string a_invert, std::string b_invert,
+                      std::string less_than, std::string opcode);
+
+  /**
+   * Detects if all of the 64 bits of the ALU's operation output are 0.
+   * @param input - 64-bit bus. Should represent the ALU's operation output.
+   * @returns 1 bit. 1 if all are zero; otherwise 0.
+   */
+  std::string detect_zero(std::string input);
 
 public:
   /**
@@ -76,8 +81,7 @@ public:
    * 65th bit is the carry-out bit. The 66th bit is the overflow bit. The 67th
    * bit is the zero bit.
    */
-  std::string run(std::string input, std::string cin, std::string a_invert,
-                  std::string b_invert, std::string opcode);
+  std::string run(std::string input, std::string cin, std::string a_invert, std::string b_invert, std::string opcode);
 };
 
 #endif

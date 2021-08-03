@@ -67,45 +67,7 @@ std::string ALU::msb_alu(std::string input, std::string cin, std::string a_inver
   return operation_output + cout + overflow + set_less_than;
 }
 
-std::string ALU::run(std::string input, std::string cin, std::string a_invert, std::string b_invert,
-                     std::string opcode) {
-  // We fill this up with the 64 bits of the ALUs, then the overflow bit of the MSB's ALU for the 65th bit.
-  // Finally, we'll have a zero-detection circuit that fills the last (i.e. 66th) bit.
-  std::string full_output;
-  // We start by computing the LSB's ALU.
-  // Since it forms a sequential circuit with the MSB's ALU (via the less-than bit)...
-  // ...for now, we're only putting a dummy value of 0, just like with the other ALUs.
-  // This means that the initial result won't be right, but we'll correct it later on...
-  // ...when we get the ACTUAL less-than bit from the MSB's ALU.
-  // As for the carry-out bit, it'll be correct, so we go ahead and set it as the carry-in bit for the next ALU.
-  std::string lsb_alu = basic_alu(input.substr(63, 1) + input.substr(127, 1),
-                                  cin, a_invert, b_invert, "0", opcode);
-  full_output += lsb_alu.substr(0, 1);
-  std::string current_cin = lsb_alu.substr(1, 1);
-  // Emulate the ripple-carry via a for-loop.
-  for (int i = 62; i > 0; --i) {
-    // Remember to hard code the less-than bit to 0.
-    std::string current_alu = basic_alu(input.substr(i, 1) + input.substr(i + 64, 1),
-                                        current_cin, a_invert, b_invert, "0", opcode);
-    full_output += current_alu.substr(0, 1);
-    current_cin = current_alu.substr(1, 1);
-  }
-  // Now we do the MSB's ALU.
-  std::string final_alu = msb_alu(input.substr(0, 1) + input.substr(64, 1),
-                                  current_cin, a_invert, b_invert, "0", opcode);
-  // Append the output, then reverse the string so that it's big endian.
-  full_output += final_alu.substr(0, 1);
-  std::reverse(full_output.begin(), full_output.end());
-  // Now add the cout and overflow bits.
-  full_output += final_alu.substr(1, 2);
-  // Extract the less-than bit and pass it back up to the LSB's ALU, then perform the correction.
-  // Make sure to perform the correction at index 63, since we changed the order to big endian.
-  std::string less_than = final_alu.substr(3, 1);
-  lsb_alu = basic_alu(input.substr(63, 1) + input.substr(127, 1),
-                      cin, a_invert, b_invert, less_than, opcode);
-  full_output.replace(63, 1, lsb_alu.substr(0, 1));
-  // Now we have to check the operation output for a zero. We do this using repeated OR gates followed by a NOR gate.
-  std::string operation_output = full_output.substr(0, 64);
+std::string ALU::detect_zero(std::string input) {
   std::string or_layer_64;
   std::string or_layer_32;
   std::string or_layer_16;
@@ -114,7 +76,7 @@ std::string ALU::run(std::string input, std::string cin, std::string a_invert, s
   std::string or_layer_2;
   // Initially 64 bits.
   for (int i = 0; i <= 62; i += 2) {
-    or_layer_32 += logic::OR(operation_output.substr(i, 2));
+    or_layer_32 += logic::OR(input.substr(i, 2));
   }
   // Now 32 bits.
   for (int i = 0; i <= 30; i += 2) {
@@ -133,7 +95,43 @@ std::string ALU::run(std::string input, std::string cin, std::string a_invert, s
     or_layer_2 += logic::OR(or_layer_4.substr(i, 2));
   }
   // Now 2 bits.
-  full_output += logic::NOR(or_layer_2);
-  // With the operation output, the cout, the overflow, and now the zero bit, we're ready to return.
-  return full_output;
+  return logic::NOR(or_layer_2);
+}
+
+std::string ALU::run(std::string input, std::string cin, std::string a_invert, std::string b_invert,
+                     std::string opcode) {
+  std::string retval;
+  // Start by computing the LSB's ALU.
+  // It forms a sequential circuit with the MSB's ALU (via the less-than bit), which affects the operation output.
+  // This means that the operation output is incorrect, but we'll correct it after we compute the MSB's ALU.
+  // On the other hand, the carry-out bit is correct, and luckily it's all we need right now.
+  std::string lsb_alu = basic_alu(input.substr(63, 1) + input.substr(127, 1),
+                                  cin, a_invert, b_invert, "0", opcode);
+  // As aforementioned, we'll correct this bit later on. For now, just add it to the retval.
+  retval += lsb_alu.substr(0, 1);
+  // With the carry-out bit, we can go ahead an emulate all the other ALUs in a ripple-carry fashion via a for-loop.
+  std::string current_cin = lsb_alu.substr(1, 1);
+  for (int i = 62; i > 0; --i) {
+    std::string current_alu = basic_alu(input.substr(i, 1) + input.substr(i + 64, 1),
+                                        current_cin, a_invert, b_invert, "0", opcode);
+    retval += current_alu.substr(0, 1);
+    current_cin = current_alu.substr(1, 1);
+  }
+  // Now we compute the MSB's ALU and add its operation output to the retval.
+  std::string final_alu = msb_alu(input.substr(0, 1) + input.substr(64, 1),
+                                  current_cin, a_invert, b_invert, "0", opcode);
+  retval += final_alu.substr(0, 1);
+  // Make the retval big endian.
+  std::reverse(retval.begin(), retval.end());
+  // Now add the cout and overflow bits.
+  retval += final_alu.substr(1, 2);
+  // Now we perform the LSB correction. Extract the MSB's ALU's less-than bit and pass it back up to the LSB's ALU.
+  std::string less_than = final_alu.substr(3, 1);
+  lsb_alu = basic_alu(input.substr(63, 1) + input.substr(127, 1),
+                      cin, a_invert, b_invert, less_than, opcode);
+  // Make the correction at the last bit b/c the retval is now big endian.
+  retval.replace(63, 1, lsb_alu.substr(0, 1));
+  // Finally, based on the (now corrected) operation output, compute the zero bit and append it to the retval.
+  retval += detect_zero(retval.substr(0, 64));
+  return retval;
 }
