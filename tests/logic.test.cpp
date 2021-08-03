@@ -1,6 +1,6 @@
 /**
  * Tests for logic gates.
- * Copyright (C) 2021 Westermeister.
+ * Copyright (c) 2021 Westermeister.
  */
 
 #include "catch.hpp"

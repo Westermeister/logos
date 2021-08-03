@@ -1,6 +1,6 @@
 /**
  * Entry point for emulation.
- * Copyright (C) 2021 Westermeister. All rights reserved.
+ * Copyright (c) 2021 Westermeister. All rights reserved.
  */
 
 #include <iostream>
