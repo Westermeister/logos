@@ -5,12 +5,13 @@ all: format
 
 .PHONY: check
 check: format tests/catch.o
-	# g++ -std=c++11 -Wall -Itests -o tests/testrunner.o tests/catch.o tests/logic.cpp tests/mux.cpp
 	g++ -std=c++11 -Wall -Itests -o tests/testrunner.o tests/catch.o \
 	tests/logic.test.cpp \
 	src/logic.cpp \
 	tests/mux.test.cpp \
-	src/mux.cpp
+	src/mux.cpp \
+	tests/alu.test.cpp \
+	src/alu.cpp
 	./tests/testrunner.o
 	rm -f tests/testrunner.o
 
