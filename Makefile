@@ -1,7 +1,7 @@
 .PHONY: all
 all: format
 	mkdir -p build
-	g++ -std=c++17 -Wall -Wextra src/main.cpp -o build/chip.out
+	g++ -std=c++17 -Wall -Wextra src/*.cpp -o build/chip.out
 
 .PHONY: check
 check: format tests/catch.o
